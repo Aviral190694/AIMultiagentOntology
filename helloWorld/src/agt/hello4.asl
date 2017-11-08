@@ -20,6 +20,9 @@
 +!print_r    : focused(jacamo,gui,ArtId) <- printMsg("r")[artifact_id(ArtId)]; .wait(700).
 +!print_d    : focused(jacamo,gui,ArtId) <- printMsg("d")[artifact_id(ArtId)]; .wait(700).
 +!print_excl : focused(jacamo,gui,ArtId) <- printMsg("!")[artifact_id(ArtId)]; .wait(700).
+
+
++tick <- .print("perceived a tick").
 //+!start : true <- .print("hello world.").
 
 +!start : message(M) <- printMsg(M).

@@ -138,13 +138,13 @@ public class GUIConsole extends Artifact {
     }
     
     // implements an operation available to the agents
-    @OPERATION void printMsg(String msg) {
-    		
+    @OPERATION void printMsg(String msg) {	
         String agentName = this.getOpUserName();
         ObsProperty prop = this.getObsProperty("numMsg");
         prop.updateValue(prop.intValue()+1);
         display.addText("Message at "+System.currentTimeMillis()+" from "+agentName+": "+msg);
         display.updateNumMsgField(prop.intValue());
+        signal("tick");
     }    
     private static final String PIZZA_IRI = "http://www.co-ode.org/ontologies/pizza/pizza.owl";
     
@@ -165,14 +165,30 @@ public class GUIConsole extends Artifact {
       int c=0;
       for (OWLClass cls : pizzaOntology.getClassesInSignature()) {
           String id = cls.getIRI().toString();
-          System.out.println(++c + " : " + id + "\n");
+//          System.out.println(++c + " : " + id + "\n");
+          String[] str_array = id.split("#");
+//          String stringa = str_array[0]; 
+          String stringb = str_array[1];
+          System.out.println(++c + " : " + stringb);
       }
       
-      java.util.Set<OWLEntity> entOnt = pizzaOntology.getSignature();
-
-      for (OWLEntity a : entOnt) {
-      System.out.println("\nEntity " + a);
-      }
+      OWLDataFactory factory = manager.getOWLDataFactory();
+      PrefixManager pm = new DefaultPrefixManager(
+              "http://www.co-ode.org/ontologies/pizza/pizza.ow#");
+      OWLClass clsAMethodB = factory.getOWLClass(":American", pm);
+      System.out.println(clsAMethodB);
+      
+//      OWLNamedIndividual mary = factory.getOWLNamedIndividual(":Mary", pm);
+      
+      OWLDeclarationAxiom declarationAxiom = factory
+              .getOWLDeclarationAxiom(clsAMethodB);
+      System.out.println(declarationAxiom);
+      
+//      java.util.Set<OWLEntity> entOnt = pizzaOntology.getSignature();
+//
+//      for (OWLEntity a : entOnt) {
+//      System.out.println("\nEntity " + a);
+//      }
         
     }
     
