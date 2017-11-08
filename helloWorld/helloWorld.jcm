@@ -1,0 +1,73 @@
+/*
+    helloWorld
+    ---------------------------
+
+    JaCaMo Project File
+
+    This file defines the initial state of the MAS (initial agents, environment, organization, ....)
+
+    (see jacamo/doc/jcm.html for more information about what can be defined in this file)
+
+    JaCaMo <VERSION>
+    <DATE>
+*/
+
+mas helloWorld {
+
+	agent aviral : hello4.asl {
+		beliefs : message("Pranam!")
+		focus : hin.gui
+		focus : jacamo.gui
+	}
+	agent naman : hello4.asl {
+		beliefs : message("Namaste!")
+		focus : hin.gui
+		focus : jacamo.gui
+	}
+	agent aashna : hello4.asl {
+		beliefs : message("Nomoshkar!")
+		focus : ben.gui
+		focus : hin.gui
+		focus : jacamo.gui
+	}
+	agent ashish : hello4.asl {
+		beliefs : message("Hi!")
+		focus : jacamo.gui
+	}
+    agent aviral : hello2.asl {
+    	beliefs : country(it)
+    }
+    agent rohan : hello2.asl {
+    	beliefs : country(us)
+    }
+    agent other : hello2.asl
+    
+    workspace jacamo {
+    	artifact gui: display.GUIConsole("common")
+    }
+    workspace hin {
+    	artifact gui: display.GUIConsole("Test1")
+    }
+    workspace ben {
+    	artifact gui: display.GUIConsole("Test2")
+    }
+    
+    organisation hello_org : o1.xml {
+    	group jacamo_team : team {
+    		responsible-for : hello_eng
+    		players : aviral rc
+    				  aashna rv,
+    				  ashish rs
+    	}
+    	scheme hello_eng: hello_sch {
+    	}
+    }
+    
+    // agent source path
+    asl-path: src/agt
+              src/agt/inc
+
+    
+
+}
+
