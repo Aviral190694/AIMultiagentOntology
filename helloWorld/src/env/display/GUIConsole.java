@@ -130,15 +130,16 @@ public class GUIConsole extends Artifact {
         this.defineObsProperty("numMsg",0);
         display = new Display(name);
         display.setVisible(true);
+        try {
+			shouldLoad();
+		} catch (OWLOntologyCreationException e) {
+			System.out.println("Expection");
+		}
     }
     
     // implements an operation available to the agents
     @OPERATION void printMsg(String msg) {
-    		try {
-    			shouldLoad();
-    		} catch (OWLOntologyCreationException e) {
-    			System.out.println("Expection");
-    		}
+    		
         String agentName = this.getOpUserName();
         ObsProperty prop = this.getObsProperty("numMsg");
         prop.updateValue(prop.intValue()+1);
@@ -157,9 +158,24 @@ public class GUIConsole extends Artifact {
         System.out.println("Loaded ontology: " + pizzaOntology);
 //        display.addText("Loaded ontology: " + pizzaOntology);
         
+//        IRI documentIRI = manager.getOntologyDocumentIRI(iri);
+//      System.out.println("\nfrom: " + documentIRI);
+      
+      System.out.println("\nClasses\n");
+      int c=0;
+      for (OWLClass cls : pizzaOntology.getClassesInSignature()) {
+          String id = cls.getIRI().toString();
+          System.out.println(++c + " : " + id + "\n");
+      }
+      
+      java.util.Set<OWLEntity> entOnt = pizzaOntology.getSignature();
+
+      for (OWLEntity a : entOnt) {
+      System.out.println("\nEntity " + a);
+      }
+        
     }
     
-
     static class Display extends JFrame {       
         
         private JTextArea text;
