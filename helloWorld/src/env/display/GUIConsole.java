@@ -130,11 +130,11 @@ public class GUIConsole extends Artifact {
         this.defineObsProperty("numMsg",0);
         display = new Display(name);
         display.setVisible(true);
-        try {
-			shouldLoad();
-		} catch (OWLOntologyCreationException e) {
-			System.out.println("Expection");
-		}
+//        try {
+//			shouldLoad();
+//		} catch (OWLOntologyCreationException e) {
+//			System.out.println("Expection");
+//		}
     }
     
     // implements an operation available to the agents
@@ -146,6 +146,12 @@ public class GUIConsole extends Artifact {
         display.updateNumMsgField(prop.intValue());
         signal("tick");
     }    
+    
+    @OPERATION void ontologyName(String ontologyName) {
+    		System.out.println(ontologyName);
+    }
+    
+    
     private static final String PIZZA_IRI = "http://www.co-ode.org/ontologies/pizza/pizza.owl";
     
     public void shouldLoad() throws OWLOntologyCreationException {

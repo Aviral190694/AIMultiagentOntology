@@ -14,6 +14,24 @@
 
 mas helloWorld {
 
+	agent bob: hello4.asl {
+		focus : hin.gui
+		focus : jacamo.gui
+	}
+
+    agent alice   : participant.asl {
+		focus : hin.gui
+	}
+    agent maria   : participant.asl {
+		focus : hin.gui
+	}
+    agent francois: participant.asl {
+		focus : hin.gui
+	}
+    agent giacomo : participant.asl {
+		focus : hin.gui
+	}
+
 	agent aviral : hello4.asl {
 		beliefs : message("Pranam!")
 		focus : hin.gui
@@ -44,20 +62,28 @@ mas helloWorld {
     
     workspace jacamo {
     	artifact gui: display.GUIConsole("common")
+    	
     }
     workspace hin {
-    	artifact gui: display.GUIConsole("Test1")
+    	artifact gui: display.GUIConsole("Test1") {
+    		 focused-by: bob, alice, maria, francois, giacomo
+    	}
     }
     workspace ben {
     	artifact gui: display.GUIConsole("Test2")
     }
+    
+   
+    
     
     organisation hello_org : o1.xml {
     	group jacamo_team : team {
     		responsible-for : hello_eng
     		players : aviral rc
     				  aashna rv,
-    				  ashish rs
+    				  ashish rs,
+    				  bob bi
+    				  
     	}
     	scheme hello_eng: hello_sch {
     	}

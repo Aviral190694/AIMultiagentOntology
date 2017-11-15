@@ -8,7 +8,7 @@
 
 /* Plans */
 
-+!print_h    : focused(jacamo,gui,ArtId) <- printMsg("H")[artifact_id(ArtId)]; .wait(700).
++!print_h    : focused(jacamo,gui,ArtId) <- .print("Art Id is ",ArtId); printMsg("H")[artifact_id(ArtId)]; .wait(700).
 +!print_e    : focused(jacamo,gui,ArtId) <- printMsg("e")[artifact_id(ArtId)]; .wait(700).
 +!print_l1   : focused(jacamo,gui,ArtId) <- printMsg("l")[artifact_id(ArtId)]; .wait(700).
 +!print_l2   : focused(jacamo,gui,ArtId) <- printMsg("l")[artifact_id(ArtId)]; .wait(700).
@@ -26,6 +26,15 @@
 //+!start : true <- .print("hello world.").
 
 +!start : message(M) <- printMsg(M).
++!start : focused(jacamo,gui,ArtId) <- printMsg("running this is good")[artifact_id(ArtId)];
+		   .broadcast(tell, auction(service, flight_ticket(paris,athens,"15/12/2015"))).
+
++bid(Service, _) :  .findall(b(V,A),bid(Service,V)[source(A)],L) &  .length(L,4) <-
+	  .min(L,b(V,W));
+      .print("Winner for ", Service, " is ",W," with ", V);
+      .print(ArtId); 
+      .broadcast(tell, winner(Service,W)).
+      
 +!start : true <- .print("hello world.").
 
 { include("$jacamoJar/templates/common-cartago.asl") }

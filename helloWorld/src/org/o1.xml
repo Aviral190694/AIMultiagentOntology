@@ -17,6 +17,7 @@
     <role id="rv" />
     <role id="rc" />
     <role id="rs" />
+    <role id="bi" />
 </role-definitions>
 
 <group-specification id="team">
@@ -24,6 +25,7 @@
         <role id="rv" min="1" max="1"/>
         <role id="rc" min="1" max="1"/>
         <role id="rs" min="1" max="1"/>
+        <role id="bi" min="1" max="1"/>
     </roles>
 </group-specification>
 </structural-specification>
@@ -44,6 +46,7 @@
                 <goal id="print_l3"   ttf="10 minutes" />
                 <goal id="print_d"    ttf="10 minutes" />
                 <goal id="print_excl" ttf="10 minutes" />
+                <goal id="start" ttf="10 minutes"  />
             </plan>
         </goal>
 
@@ -65,6 +68,9 @@
             <goal id="print_spc"/>
             <goal id="print_excl"/>
         </mission>
+        <mission id="bid" min="1" max="1">
+            <goal id="start"/>
+        </mission>
     </scheme>
 </functional-specification>
 
@@ -72,6 +78,7 @@
     <norm id="norm1" type="obligation" role="rv" mission="print_vowel"/>
     <norm id="norm3" type="obligation" role="rc" mission="print_consonant"/>
     <norm id="norm4" type="obligation" role="rs" mission="print_special_chars"/>
+    <norm id="norm5" type="obligation" role="bi" mission="bid"/>
 </normative-specification>
 
 </organisational-specification>
